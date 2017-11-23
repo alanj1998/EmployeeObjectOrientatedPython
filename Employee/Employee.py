@@ -7,12 +7,15 @@ class Employee(object):
             1)Variables and methods follow small case with _ for breaks
             2)Class names use Upper Camelcase
     """
+    employee_count = 0
+
     def __init__(self, first_name, last_name, employee_id, salary, department):
         self.first_name = first_name
         self.last_name = last_name
         self.employee_id = employee_id
         self.salary = salary
         self.department = department
+        Employee.employee_count += 1
 
     def display_it(self):
         """
@@ -25,7 +28,8 @@ class Employee(object):
         """
         print('Employee ' + self.employee_id)
         print(self.first_name + " " + self.last_name)
-        print('Works in the ' + self.department + " department on a basic salary of EUR" + str('{0:.2f}'.format(self.salary)))
+        print('Works in the ' + self.department + 
+              " department on a basic salary of EUR" + str('{0:.2f}'.format(self.salary)))
 
     def pay_rise(self, percantage_increase):
         """
@@ -35,3 +39,13 @@ class Employee(object):
             1)Self must be passed to be used
         """
         self.salary = self.salary * (1 + percantage_increase)
+
+    @classmethod
+    def show_count_of_employees(cls):
+        """
+        Static method used to display the amount of Employee objects currently created
+        """
+        if Employee.employee_count is 1:
+            print('There is currently %s Employee created!' % Employee.employee_count)
+        else:
+            print('There are currently %s Employees created!' % Employee.employee_count)
